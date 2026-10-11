@@ -1,0 +1,62 @@
+[
+  {
+    "id": "launchd-backup-script-fails",
+    "kind": "stuck",
+    "domain": "code bug (shell script, macOS launchd)",
+    "prompt": "I wrote a zsh script that zips my practice admin folder at ~/Desktop/Practice Admin and copies the zip to an external drive. Run by hand in Terminal it works every time. Scheduled with a launchd plist at 7pm daily, it writes an empty zip and the log says \"Operation not permitted\" on every file. First I changed the plist to call /bin/zsh with the full script path. Same error. Then I ran chmod +x and chmod 755 on the script and the folder. Same. Then I added a PATH line and full paths to zip and cp inside the script. Still the same error, still only under launchd. What is going on and how do I fix it?"
+  },
+  {
+    "id": "react-list-scroll-reset",
+    "kind": "stuck",
+    "domain": "code bug (React in Electron)",
+    "prompt": "In my Electron app a dashboard shows about 200 appointment rows in a scrollable list. Every 30 seconds a timer refreshes a clock in the Dashboard header, and every time it does, the list jumps back to the top and any row I had expanded collapses. To keep the list tidy I wrote a small Panel component right inside the Dashboard function so it can read Dashboard's state directly, and the list renders inside Panel. Attempts so far: I wrapped the list in React.memo, no change. I wrapped the rows array in useMemo, no change. I switched row keys from array index to stable appointment ids, no change. Why does it keep resetting?"
+  },
+  {
+    "id": "burnout-article-wont-flow",
+    "kind": "stuck",
+    "domain": "writing and editing",
+    "prompt": "I am writing an article on burnout for a GP newsletter. The editor keeps saying it does not flow and feels long. It has five sections: why GPs burn out, early signs in yourself, what to do when you notice them, how to tell when a patient is burning out, and when to refer a patient to a psychologist. First I cut it from 2,400 to 1,600 words. Editor said it still drags. Then I swapped the order of sections two and four. Same note. Then I rewrote the opening three times, once with a statistic and twice with a short story. The editor still says it does not hang together. What should I change?"
+  },
+  {
+    "id": "monday-no-shows",
+    "kind": "stuck",
+    "domain": "practice operations",
+    "prompt": "My no-show rate is about 6% on Tuesday to Friday but around 30% for Monday appointments, mostly the 9am and 10am slots. My booking system sends an SMS reminder and I checked the log: every reminder shows as delivered. Monday reminders show a sent time of Friday 9am, the rest go out the business day before. First I moved reminders from 48 hours to 24 hours before. Monday stayed at 30%. Then I added a second reminder email. No change. Then I brought in a $50 deposit for Monday bookings, which annoyed people and barely moved it, down to 27%. What would actually fix Mondays?"
+  },
+  {
+    "id": "sumifs-reconciliation-gap",
+    "kind": "stuck",
+    "domain": "data and spreadsheets",
+    "prompt": "Each month I reconcile invoices against payments in Excel. The payments tab is a CSV export from my card terminal with columns for date (shown like 31/08/2026 4:12 PM), invoice number and amount. A SUMIFS totals payments where the date is >= the 1st and <= the last day of the month. It always comes in under my invoice total, by $1,247 in August and $890 in September, and the missing payments are real. First I retyped the date criteria. No change. Then I converted the amount column to numbers with VALUE. No change. Then I used TRIM on the invoice numbers in case of spaces. Still short. What is wrong?"
+  },
+  {
+    "id": "gp-referral-outreach-flat",
+    "kind": "stuck",
+    "domain": "marketing and outreach",
+    "prompt": "I want more GP referrals to my private practice in Frankston. Over six weeks I sent LinkedIn messages to 40 local GPs I found by searching. Two replied, both polite, no referrals. First round was a 150 word intro about my approach. Then I cut it to 50 words. Then I added my AHPRA registration and the conditions I see. Then I personalised the first line with something from each GP's profile and offered a free lunch-and-learn at their clinic. Still about a 5% reply rate and zero referrals. Most of the profiles had under 50 connections and no posts. What should I do differently?"
+  },
+  {
+    "id": "same-day-notes-backlog",
+    "kind": "stuck",
+    "domain": "personal productivity and habits",
+    "prompt": "I want my session notes done the same day but by Friday I usually have 8 to 10 unwritten. I see clients back to back from 9 to 5 on the hour, 50 minute sessions, 10 minutes between, lunch at 12:30. Notes block is 5pm to 6pm. First I set a 15 minute timer per note at 5pm. I did two or three then stopped. Then I promised myself a nice dinner out on Friday if I hit zero backlog. Lasted one week. Then I moved the block to 7am the next morning. I just slept in or remembered less. What would actually work?"
+  },
+  {
+    "id": "duplicate-work-with-collaborator",
+    "kind": "stuck",
+    "domain": "team coordination",
+    "prompt": "I build an app with a developer friend, Sam, who works from Lisbon, so we overlap about two hours a day. Twice this month we both built the same feature, wasting about three days each time. First we set up a Notion board with Backlog, Next, Doing and Done columns, and whenever either of us has time we pull a card from Next and start. Duplicates still happened. Then we added daily Slack standups where we post what we did yesterday. Still happened. Then we recorded a weekly Loom walkthrough of progress. Happened again last week. How do we stop this?"
+  },
+  {
+    "id": "cpd-talk-prep-plan",
+    "kind": "control",
+    "domain": "planning",
+    "prompt": "I have been asked to give a 20 minute talk at a local psychologists' CPD evening in five weeks, on how I use AI tools to cut admin time in private practice. It will be about 30 people, mostly sole practitioners, with 10 minutes of questions after. I have a few hours spare each week, mainly Sunday mornings. Can you give me a simple week by week plan to get from nothing to a finished talk, including when to do a practice run and what to bring on the night?"
+  },
+  {
+    "id": "explain-git-merge-vs-rebase",
+    "kind": "control",
+    "domain": "explanation",
+    "prompt": "I am not a developer but I build small apps with Claude and keep everything in git. People keep mentioning merge and rebase and I nod along. Can you explain in plain words what each one does when I have a branch with a new feature and the main branch has moved on, what the history looks like after each, and which one a solo person like me should use by default? A short example with three or four commits would help."
+  }
+]

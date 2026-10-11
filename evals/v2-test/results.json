@@ -1,0 +1,206 @@
+{
+ "conditions": {
+  "baseline": {
+   "all": 7.37,
+   "stuck": 7.25,
+   "control": 7.83,
+   "mean_words": 529
+  },
+  "frame1": {
+   "all": 7.47,
+   "stuck": 7.44,
+   "control": 7.58,
+   "mean_words": 615,
+   "diff_vs_baseline_all": 0.1,
+   "ci95_all": [
+    -0.28,
+    0.48
+   ],
+   "pct_vs_baseline_all": 1.4,
+   "diff_vs_baseline_stuck": 0.19,
+   "ci95_stuck": [
+    -0.23,
+    0.6
+   ],
+   "pct_vs_baseline_stuck": 2.6
+  },
+  "frame2": {
+   "all": 7.92,
+   "stuck": 7.9,
+   "control": 8.0,
+   "mean_words": 516,
+   "diff_vs_baseline_all": 0.55,
+   "ci95_all": [
+    0.17,
+    0.93
+   ],
+   "pct_vs_baseline_all": 7.5,
+   "diff_vs_baseline_stuck": 0.65,
+   "ci95_stuck": [
+    0.25,
+    1.08
+   ],
+   "pct_vs_baseline_stuck": 9.0
+  },
+  "anneal1": {
+   "all": 7.65,
+   "stuck": 7.54,
+   "control": 8.08,
+   "mean_words": 606,
+   "diff_vs_baseline_all": 0.28,
+   "ci95_all": [
+    -0.13,
+    0.72
+   ],
+   "pct_vs_baseline_all": 3.8,
+   "diff_vs_baseline_stuck": 0.29,
+   "ci95_stuck": [
+    -0.19,
+    0.79
+   ],
+   "pct_vs_baseline_stuck": 4.0
+  },
+  "anneal2": {
+   "all": 8.27,
+   "stuck": 8.29,
+   "control": 8.17,
+   "mean_words": 504,
+   "diff_vs_baseline_all": 0.9,
+   "ci95_all": [
+    0.58,
+    1.22
+   ],
+   "pct_vs_baseline_all": 12.2,
+   "diff_vs_baseline_stuck": 1.04,
+   "ci95_stuck": [
+    0.69,
+    1.42
+   ],
+   "pct_vs_baseline_stuck": 14.3
+  }
+ },
+ "per_task": {
+  "launchd-backup-script-fails": {
+   "kind": "stuck",
+   "baseline": 8.0,
+   "frame1": 7.83,
+   "frame2": 7.5,
+   "anneal1": 7.17,
+   "anneal2": 8.33
+  },
+  "react-list-scroll-reset": {
+   "kind": "stuck",
+   "baseline": 8.17,
+   "frame1": 8.67,
+   "frame2": 8.33,
+   "anneal1": 7.83,
+   "anneal2": 8.33
+  },
+  "burnout-article-wont-flow": {
+   "kind": "stuck",
+   "baseline": 7.67,
+   "frame1": 6.83,
+   "frame2": 8.0,
+   "anneal1": 8.0,
+   "anneal2": 8.83
+  },
+  "monday-no-shows": {
+   "kind": "stuck",
+   "baseline": 7.17,
+   "frame1": 7.17,
+   "frame2": 7.5,
+   "anneal1": 7.0,
+   "anneal2": 8.0
+  },
+  "sumifs-reconciliation-gap": {
+   "kind": "stuck",
+   "baseline": 8.17,
+   "frame1": 7.33,
+   "frame2": 8.17,
+   "anneal1": 7.17,
+   "anneal2": 8.5
+  },
+  "gp-referral-outreach-flat": {
+   "kind": "stuck",
+   "baseline": 7.0,
+   "frame1": 7.0,
+   "frame2": 8.67,
+   "anneal1": 8.0,
+   "anneal2": 8.0
+  },
+  "same-day-notes-backlog": {
+   "kind": "stuck",
+   "baseline": 5.83,
+   "frame1": 6.83,
+   "frame2": 7.83,
+   "anneal1": 7.67,
+   "anneal2": 7.83
+  },
+  "duplicate-work-with-collaborator": {
+   "kind": "stuck",
+   "baseline": 6.0,
+   "frame1": 7.83,
+   "frame2": 7.17,
+   "anneal1": 7.5,
+   "anneal2": 8.5
+  },
+  "cpd-talk-prep-plan": {
+   "kind": "control",
+   "baseline": 7.67,
+   "frame1": 8.0,
+   "frame2": 8.0,
+   "anneal1": 8.33,
+   "anneal2": 8.17
+  },
+  "explain-git-merge-vs-rebase": {
+   "kind": "control",
+   "baseline": 8.0,
+   "frame1": 7.17,
+   "frame2": 8.0,
+   "anneal1": 7.83,
+   "anneal2": 8.17
+  }
+ },
+ "judge_best_counts": {
+  "baseline": 6,
+  "frame1": 8,
+  "frame2": 14,
+  "anneal1": 8,
+  "anneal2": 24
+ },
+ "per_judge": {
+  "opus-5.5": {
+   "stuck": {
+    "baseline": 7.25,
+    "frame1": 7.54,
+    "frame2": 8.04,
+    "anneal1": 7.96,
+    "anneal2": 8.29
+   },
+   "control": {
+    "anneal2": 7.83,
+    "baseline": 7.5,
+    "frame1": 8.17,
+    "frame2": 7.67,
+    "anneal1": 8.0
+   }
+  },
+  "openai/gpt-6.1-sol-pro": {
+   "stuck": {
+    "anneal2": 8.29,
+    "anneal1": 7.12,
+    "frame2": 7.75,
+    "frame1": 7.33,
+    "baseline": 7.25
+   },
+   "control": {
+    "anneal1": 8.17,
+    "frame2": 8.33,
+    "frame1": 7.0,
+    "baseline": 8.17,
+    "anneal2": 8.5
+   }
+  }
+ },
+ "spent_usd": 9.13
+}

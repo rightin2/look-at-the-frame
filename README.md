@@ -1,6 +1,6 @@
 # Look at the Frame
 
-When Claude has failed twice at the same fix or draft, this skill makes it find the assumption all the attempts shared and change it before trying again. Works in Claude Code and any agent that reads `SKILL.md` files.
+When Claude has tried two or three versions of the same fix and none of them worked, this skill makes it find what every attempt kept the same and change that before trying again. Works in Claude Code and any agent that reads `SKILL.md` files.
 
 [![A still from the 15 second video: the words "It's the frame." in white and lime behind flying shards of neon glass. Click to watch.](assets/poster.png)](assets/look-at-the-frame.mp4)
 
@@ -29,113 +29,100 @@ cp -r look-at-the-frame/skills/look-at-the-frame ~/.claude/skills/
 
 ## Try it
 
-You do not need to call it by name. It is written to start when the conversation shows one of these signals:
-
-- two fixes or drafts have already failed
-- a list of special cases keeps growing and never settles
-- your explanation keeps needing new exceptions to fit what you see
-- one detail does not fit any of the explanations you are weighing
-- you bring an either/or choice, or say you keep going back and forth
+You do not need to call it by name. It starts only when the conversation shows two or more attempts that changed nothing and were variations on one approach: the same mechanism with different settings, or a list of special cases that keeps growing. On a first try, or a choice where nothing has failed yet, Claude answers as it normally would.
 
 Prompts that set it off:
 
 ```
-Bookings near midnight land in the wrong week. I've tried three fixes and each one breaks a different test.
+Bookings near midnight land in the wrong week. I've tried converting to UTC, changing the date format and adding a timezone. Each one fixes one test and breaks another.
 ```
 
 ```
-I've rewritten this discussion section three times and it still has no spine.
+I sent LinkedIn messages to 40 local GPs. I tried a long intro, a short one, adding my registration, then personalising the first line. Still a 5% reply rate and no referrals.
 ```
 
-```
-I keep going back and forth on whether to take this role. Here are the pros and cons.
-```
-
-Claude replies with "Reframing", then works through the steps below before it offers another attempt. If you have only tried once, it carries on fixing as normal.
+If the failed attempts were different in kind rather than variations on one, the companion skill [Heat Then Cool](https://github.com/rightin2/heat-then-cool) is the one that fits. The two never run together.
 
 ## How it works
 
-The skill has seven steps. In short:
-
-![Four moves in order: count the failed attempts; list and label the assumptions as imposed or projected; name what every failed attempt held constant; change the frame and say what the new frame cannot see.](assets/four-moves.png)
-
-1. **Count the failed attempts.** It fires after two failures or one of the signals above, never on a hunch.
-2. **List and label what every attempt took for granted,** checked against what the attempts actually did. Each assumption is marked imposed (you, the data or the code said it) or projected (Claude added it).
-3. **Name what every failed attempt held constant.**
-4. **Change one shared assumption,** preferably a projected one, and say which. Flipping to the opposite of the last attempt, such as stricter instead of looser, does not count, because both sides of a flip rest on the same assumptions.
-
-Its final answer ends by naming the approach it took and what that approach would miss, and checks the answer against each gap. In the midnight bug test below, the gaps it named were clinics in different timezones and the nights the clocks change.
-
-## Example: the midnight bug
-
 ![Three fixes, one assumption: convert to UTC, change the date format and add a timezone each fixed one test and broke another, and all three rest on the assumption that the week is a property of how the date is written.](assets/midnight-bug.png)
 
-Bookings land in the wrong week near midnight. Three fixes have been tried: convert to UTC, change the date format, add a timezone. Each one fixed one test and broke another. The assumption all three share is that the week is a property of how the date is written.
+Claude does this in its thinking:
 
-With the skill, Claude is told to:
+1. **Name what every failed attempt kept the same,** pointing to each attempt. That shared assumption is what changes, not the wording of the answer.
+2. **Change it by stepping back a level,** finding something that holds in every case, or borrowing from a distant field. Rearranging the same parts does not count.
+3. **Refuse the opposite of the last attempt, or a midpoint between two failed ones,** unless it also changes the shared assumption. Swinging between two extremes usually means both share one.
+4. **Ask for the missing fact** if no change of assumption works.
 
-- say "Reframing" and stop editing
-- list the assumptions behind the three fixes, each marked imposed or projected
-- name the one they share
-- change it, say which, and only then make a fourth attempt
+What you see is plain: the shared assumption in the first sentence, one line on why each attempt behaved as it did, the next attempt itself (code, draft or plan), and one quick check that confirms it or points elsewhere. No labels, no step names, and never longer than a plain answer.
+
+## Example: GP referrals going nowhere
+
+This is one of the test tasks, quoted in short in the second prompt above. Four rewrites of the same LinkedIn message all got about a 5% reply rate and no referrals.
 
 <details>
-<summary>What a reply looks like</summary>
+<summary>What the reply looked like</summary>
 
-The opening of the skill's real answer to this task in the blind test:
+The opening of the skill's real answer in the blind test, which both judges scored 9 out of 10:
 
-> **Reframing.** Three different fixes have each moved the failure without removing it. That usually means they share an assumption that is wrong, so a fourth parsing tweak probably won't help.
+> All four versions changed the message; none changed the channel or the person receiving it. Every attempt was a LinkedIn DM to an individual GP, and your own data suggests the problem is there: profiles with under 50 connections and no posts usually mean the owner rarely logs in, so most of your messages were probably never read.
 >
-> **Assumptions the three fixes share**
-> - *Imposed (from you):* the input is CSVs of appointments, each booking gets a week, and bookings near midnight are misassigned.
-> - *Projected (built into the fixes):* the bug is in how the time is parsed or converted.
-> - *Projected:* a booking's timestamp is an absolute instant, so getting the instant right gives the right week.
-> - *Projected:* there is one agreed definition of "which week", and the tests all encode it.
+> Why each attempt stayed flat:
+> - **150-word intro:** Length wasn't the issue if it wasn't opened.
+> - **50-word version:** Shorter, but it went to the same unopened inbox.
+> - **Adding AHPRA and conditions:** Good content, but GPs who never saw it couldn't weigh it.
+> - **Personalised line and lunch-and-learn:** The strongest offer, sent through the weakest pipe.
 
-It went on to suggest a ten minute check: for each failing test, see whether the local date or the UTC date predicts the expected week. If neither does, the tests disagree with each other and no code can pass them all.
+It went on to a practice manager phone script and a referral sheet, then a quick check: call five local clinics and ask how their GPs choose who to refer to. If the answer is "whoever's in our system", the plan holds. If the patient chooses, effort should move to being easy for patients to find.
 
 </details>
 
 ## Does it work?
 
-In a blind test, Claude Opus scored answers to three tasks from four setups without knowing which setup wrote which: a bug that keeps coming back, an essay with no spine, and a decision that keeps going round. This skill averaged **8.3 out of 10**, the highest of the four and **25% higher** than no skill at **6.7**.
+Claude Opus 5.5 answered 10 tasks it had never seen, 3 times each, with and without the skill: 8 stuck problems (bugs, writing, scheduling, outreach) and 2 ordinary requests where nothing had failed. Two judges from different model families, Opus 5.5 and OpenAI's GPT-6.1 Sol, scored every answer out of 10 without knowing which setup wrote it.
+
+On the stuck problems the skill averaged **7.9 against 7.2 with no skill, 9% higher**. The 95% range for the gain is 0.25 to 1.08 points, so it is above chance, and both judges scored it higher. On the 2 ordinary requests it scored about the same as no skill (8.0 against 7.8), and its answers were no longer (516 words against 529).
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/charts/average-dark.png">
-  <img src="assets/charts/average-light.png" alt="Average blind score out of 10 for Opus 5.5 on three stuck tasks: Look at the Frame 8.3 (25% above no skill), Shape Rotate 7.7 and both combined 7.7 (15% above), no skill 6.7" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/charts/stuck-tasks-dark.png">
+  <img src="assets/charts/stuck-tasks-light.png" alt="Average blind score out of 10 on 8 stuck tasks: Look at the Frame v2 7.9 (9% above no skill), the earlier v1 7.4 (3% above, within chance), no skill 7.2" width="100%">
 </picture>
 
-On the bug, the no-skill answer was close (8 against 9). Most of the gap came from the essay and the decision, each up 33%.
+It helped most on the problems about people and routines (the notes backlog, GP outreach, duplicated work) and least on the technical bugs. On one, a backup script that fails when scheduled, it scored lower than no skill.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/charts/by-task-dark.png">
-  <img src="assets/charts/by-task-light.png" alt="Score per task without and with the skill: essay with no spine 6 to 8 (+33%), decision going in circles 6 to 8 (+33%), bug that keeps coming back 8 to 9 (+12.5%)" width="100%">
+  <img src="assets/charts/by-task-light.png" alt="Score per stuck task without and with the skill: same-day notes backlog 5.8 to 7.8, GP outreach 7.0 to 8.7, duplicated work 6.0 to 7.2, Monday no-shows 7.2 to 7.5, article that won't flow 7.7 to 8.0, app list jumping to the top 8.2 to 8.3, spreadsheet the same at 8.2, backup script 8.0 down to 7.5" width="100%">
 </picture>
 
-Every score and the judge's reason for it are in [`evals/results.json`](evals/results.json). That file also scores two other skill setups from the same project (both 7.7), which are not part of this repo. It is three tasks, run once each, scored by one model.
+**What changed since the first version.** An earlier small test (3 tasks, run once, one judge) put the first version 25% ahead. That did not hold up: on these 10 tasks the first version was only 3% ahead, within chance. Its answers were too long and printed their working. Version 2 applies [ten fixes](evals/v2-test/FIXES.md): it fires only on repeated failure, keeps its method in its thinking, caps length, and uses only facts the person gave. The companion skill, Heat Then Cool, scored higher again on the same tasks (14%).
+
+Every score and the judges' reasons are in [`evals/v2-test/results.json`](evals/v2-test/results.json), with the tasks in [`tasks.json`](evals/v2-test/tasks.json). The first version and its small test are kept in [`evals/skill-v1.md`](evals/skill-v1.md) and [`evals/v1-small-test.json`](evals/v1-small-test.json).
 
 ## What's inside
 
 ```
-skills/look-at-the-frame/SKILL.md   the skill: when it fires, its seven steps, and where the idea comes from
+skills/look-at-the-frame/SKILL.md   the skill: when it fires, what Claude does, what you see
 .claude-plugin/plugin.json          plugin manifest for Claude Code
 .claude-plugin/marketplace.json     lets /plugin marketplace add find it
-evals/results.json                  blind test scores and the judge's reasons
-assets/                             the video, its poster and the two diagrams
-assets/charts/                      the result charts and make_charts.py, which draws them from evals/results.json
+evals/v2-test/                      the 10 test tasks, the results and the ten fixes
+evals/skill-v1.md                   the first version of the skill
+evals/v1-small-test.json            the earlier 3 task test of the first version
+assets/                             the video, its poster and the diagram
+assets/charts/                      the result charts and make_charts.py, which draws them from the results
 ```
 
 ## Limits
 
-- It needs failed attempts it can see in the conversation. On a first try it has nothing to count.
-- The list of shared assumptions is Claude's own reading and can be wrong. It names an assumption; you still have to test it.
-- It can fire too early and drop an approach that needed one more local fix.
-- The imposed and projected labels are jargon. The test judge said they added friction for a busy reader.
-- The evidence is three tasks scored by a model, not by people.
+- It needs failed attempts it can see in the conversation. On a first try it has nothing to work from.
+- The shared assumption is Claude's reading and can be wrong. Pointing to each attempt is the guard, and you still have to test the change.
+- It can fire one fix too early and drop an approach that was nearly there.
+- The ten fixes were drawn from what earlier judges praised and criticised, using the same scoring rules, so part of the gain may be learning what judges reward.
+- The evidence is 8 stuck tasks and 2 ordinary ones, with Opus 5.5 answering and models judging, not people.
 
 ## Origin
 
-The skill comes from John Vervaeke's lecture series *Awakening from the Meaning Crisis*. In the nine-dot puzzle, people fail because they imagine a square around the dots that the puzzle never draws. Kaplan and Simon's advice follows from that: when attempts keep failing, ask what you keep not changing. The rule against flipping to the opposite comes from his account of Siddhartha, who tried indulgence, then self-denial, and failed at both. As Vervaeke puts it, "When you negate something you are still framing it in the same way."
+The skill comes from John Vervaeke's lecture series *Awakening from the Meaning Crisis*. In the nine-dot puzzle, people fail because they imagine a square around the dots that the puzzle never draws. When attempts keep failing, ask what you keep not changing. The rule against flipping to the opposite comes from his account of Siddhartha, who tried indulgence, then self-denial, and failed at both. As Vervaeke puts it, "When you negate something you are still framing it in the same way."
 
 ## Licence
 
