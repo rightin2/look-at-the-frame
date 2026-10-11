@@ -1,0 +1,15 @@
+{
+  "name": "look-at-the-frame",
+  "description": "Look at the Frame: a Claude skill that finds the hidden assumption behind repeated failed attempts.",
+  "owner": {
+    "name": "Jean-Luc Alder",
+    "url": "https://github.com/rightin2"
+  },
+  "plugins": [
+    {
+      "name": "look-at-the-frame",
+      "source": "./",
+      "description": "When attempts keep failing, find the assumption they all share and change it."
+    }
+  ]
+}

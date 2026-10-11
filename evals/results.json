@@ -1,0 +1,76 @@
+{
+ "tasks": {
+  "essay": {
+   "scores": {
+    "frame": {
+     "score": 8,
+     "why": "It correctly picks point 2 as the spine and explains why: it is the only item that questions the premise rather than naming a cause. The timeline structure is clear and the invented details in the sample opening are bracketed and flagged. Offering a second spine that depends on why the client came back is useful. The assumptions section adds length without much payoff."
+    },
+    "combined": {
+     "score": 9,
+     "why": "Same core insight, and it adds the most practical guidance: cut fix-it advice that drags the piece back into list mode, split the story to open and close, and fit the ending to the audience. Its limits section is honest about one returning client not being proof and notes some clients only need one session. It also mentions consent. Slightly long, but every part is usable."
+    },
+    "baseline": {
+     "score": 6,
+     "why": "It finds the spine and gives a tight, readable structure, a useful per-section test and a strong first line. But it invents facts: it calls the person Jean-Luc, makes the client a she, assumes 50-minute sessions, and places the fee talk at the end. Those are guesses presented as known."
+    },
+    "shape": {
+     "score": 8,
+     "why": "Concise, with a clear old versus new diagram and a section-by-section rebuild. It adds the hour itself as a stop and avoids guessing where the fee talk falls, asking instead. It names the missing inputs. It is a little thin on what the framing misses, such as departures unrelated to the process."
+    }
+   },
+   "best": "combined",
+   "note": "All four agree that point 2 is the thesis and that the other points form a client timeline. They differ mainly in how carefully they avoid invented facts and how honestly they name the limits of the frame."
+  },
+  "bug": {
+   "scores": {
+    "shape": {
+     "score": 8,
+     "why": "It lays out a clear four-step pipeline and maps each attempted fix to one stage. The pytz LMT detail for Paris is correct, and the code is clean. Its best advice is to rewrite each test as a triple of raw string, zone and expected week. It offers no quick way to tell which cause applies, so it leans on asking for code."
+    },
+    "baseline": {
+     "score": 8,
+     "why": "It is thorough and accurate. It adds useful points: naive datetimes depend on the machine timezone, fixed offsets break under daylight saving, and the suite should be rerun with different TZ values. The concrete test list is good. It runs long for a busy reader and picks New York as an example the user never mentioned."
+    },
+    "combined": {
+     "score": 6,
+     "why": "The framing that the tests encode conflicting specs is good, and so is mapping each possible finding to a likely bug. But it says a Sunday 23:30 local booking becomes Monday in UTC if you are east of UTC. That is backwards; it happens west of UTC. That error sits in the core explanation. It is also somewhat long."
+    },
+    "frame": {
+     "score": 9,
+     "why": "It gives the most actionable diagnostic: a ten minute check of whether the local date or the UTC date predicts each expected week. That directly separates a code bug from conflicting tests. It also catches extra real causes: closed range boundaries and DST fold. Its limits are stated clearly. The imposed and projected labels are slightly odd jargon."
+    }
+   },
+   "best": "frame",
+   "note": "All four agree on the root cause: week is a calendar concept that depends on a timezone, and the tests may encode different specs. Answer 4 stands out for its quick check that tells the user which case they are in. Answer 3 has a factual error about the UTC direction."
+  },
+  "decision": {
+   "scores": {
+    "combined": {
+     "score": 8,
+     "why": "Clear gates, timing, swing factor and pull structure that explains the circling. It honestly flags that time away from clinic could be a cost or a relief. The questions and if-then outcomes are actionable. A bit long, and treating the partner's view as a hard gate is an assumption."
+    },
+    "frame": {
+     "score": 8,
+     "why": "The sharpest insight of the four: no listed factor captures whether you want the role at all, and time away may flip sign with mood. Good third options like a review point. It runs long, and labels such as 'projected' and 'imposed' add friction for a busy reader."
+    },
+    "shape": {
+     "score": 7,
+     "why": "Tight and easy to scan, with a clear spine, decision rule and one concrete next step. It assumes time away from clinic is a cost when it could be a relief. Rule 2 (take it only if you need the income) is more prescriptive than the facts given support."
+    },
+    "baseline": {
+     "score": 6,
+     "why": "Solid grouping into gain, cost, multiplier and check, plus useful unsticking tools like the conditional yes. But it invents a name, Jean-Luc, that the person never gave. It also adds 'experience' as a factor and assumes time away is purely a cost."
+    }
+   },
+   "best": "combined",
+   "note": "Answers 1 and 2 are close. Answer 1 wins on balance of structure, honesty about the ambiguous factor and usable length. Answer 2 has the deepest insight but is wordier."
+  }
+ },
+ "totals": {
+  "baseline": 6.67,
+  "frame": 8.33,
+  "shape": 7.67,
+  "combined": 7.67
+ }
+}

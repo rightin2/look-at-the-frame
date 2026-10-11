@@ -1,0 +1,17 @@
+{
+  "name": "look-at-the-frame",
+  "description": "Look at the Frame: a Claude skill that finds the one assumption behind repeated failed attempts and changes it.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jean-Luc Alder",
+    "url": "https://github.com/rightin2"
+  },
+  "license": "MIT",
+  "keywords": [
+    "skill",
+    "reasoning",
+    "debugging",
+    "self-correction",
+    "reframing"
+  ]
+}
