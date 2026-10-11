@@ -33,13 +33,9 @@ You do not need to call it by name. It starts only when the conversation shows t
 
 Prompts that set it off:
 
-```
-Bookings near midnight land in the wrong week. I've tried converting to UTC, changing the date format and adding a timezone. Each one fixes one test and breaks another.
-```
+> Bookings near midnight land in the wrong week. I've tried converting to UTC, changing the date format and adding a timezone. Each one fixes one test and breaks another.
 
-```
-I sent LinkedIn messages to 40 local GPs. I tried a long intro, a short one, adding my registration, then personalising the first line. Still a 5% reply rate and no referrals.
-```
+> I sent LinkedIn messages to 40 local GPs. I tried a long intro, a short one, adding my registration, then personalising the first line. Still a 5% reply rate and no referrals.
 
 If the failed attempts were different in kind rather than variations on one, the companion skill [Heat Then Cool](https://github.com/rightin2/heat-then-cool) is the one that fits. The two never run together.
 
