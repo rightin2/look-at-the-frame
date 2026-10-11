@@ -98,7 +98,19 @@ It went on to suggest a ten minute check: for each failing test, see whether the
 
 ## Does it work?
 
-In a blind test, Claude Opus scored answers to three tasks from four setups without knowing which setup wrote which: a bug that keeps coming back, an essay with no spine, and a decision that keeps going round. This skill averaged **8.3 out of 10**, the highest of the four. No skill averaged **6.7**. On the bug, the no-skill answer was close (8 against 9); most of the gap came from the essay and the decision.
+In a blind test, Claude Opus scored answers to three tasks from four setups without knowing which setup wrote which: a bug that keeps coming back, an essay with no spine, and a decision that keeps going round. This skill averaged **8.3 out of 10**, the highest of the four and **25% higher** than no skill at **6.7**.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/charts/average-dark.png">
+  <img src="assets/charts/average-light.png" alt="Average blind score out of 10 for Opus 5.5 on three stuck tasks: Look at the Frame 8.3 (25% above no skill), Shape Rotate 7.7 and both combined 7.7 (15% above), no skill 6.7" width="100%">
+</picture>
+
+On the bug, the no-skill answer was close (8 against 9). Most of the gap came from the essay and the decision, each up 33%.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/charts/by-task-dark.png">
+  <img src="assets/charts/by-task-light.png" alt="Score per task without and with the skill: essay with no spine 6 to 8 (+33%), decision going in circles 6 to 8 (+33%), bug that keeps coming back 8 to 9 (+12.5%)" width="100%">
+</picture>
 
 Every score and the judge's reason for it are in [`evals/results.json`](evals/results.json). That file also scores two other skill setups from the same project (both 7.7), which are not part of this repo. It is three tasks, run once each, scored by one model.
 
@@ -110,6 +122,7 @@ skills/look-at-the-frame/SKILL.md   the skill: when it fires, its seven steps, a
 .claude-plugin/marketplace.json     lets /plugin marketplace add find it
 evals/results.json                  blind test scores and the judge's reasons
 assets/                             the video, its poster and the two diagrams
+assets/charts/                      the result charts and make_charts.py, which draws them from evals/results.json
 ```
 
 ## Limits
